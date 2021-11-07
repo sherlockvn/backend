@@ -1,0 +1,19 @@
+version: '3.2'
+services:
+  api_gateway:
+    image: pm-project
+    container_name: api_project-management
+    command: node api_gateway/server
+    restart: always
+    ports:
+      - '3003:3003'
+    networks:
+      - project-management-network
+    environment:
+      API_GATEWAY_PORT: 3003
+      MONGO_URI: mongodb://project-management-user:projectmanagementuser@chiphatsieuhay-shard-00-00.fmzf8.mongodb.net:27017,chiphatsieuhay-shard-00-01.fmzf8.mongodb.net:27017,chiphatsieuhay-shard-00-02.fmzf8.mongodb.net:27017/pm-project?ssl=true&replicaSet=atlas-sinpc8-shard-0&authSource=admin&retryWrites=true&w=majority
+      ACCESS_TOKEN_SECRET: e686a84aafb973eb85dbe09031af0a62d086f6d98347821c7ff6fc28b77cc975432654e073a47ceff2e8a974bb8541e35368bb20c4e98150b5c21134e7c4d8fb
+      REFRESH_TOKEN_SECRET: 091b7b489dad7753c68f6421d8451789d454c2c86ee8cec02c6ffef9398e33ed26aa88820432ecf9863c370faba58d1a3ec4933637a71e742c1b12eae633f9c9
+networks:
+    project-management-network:
+      external: true
