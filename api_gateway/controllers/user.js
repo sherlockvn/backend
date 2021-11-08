@@ -38,7 +38,10 @@ exports.completeSignup = async function (req, res, next) {
   }
   const db = require("../../db").Patient;
   try {
-    const existedUser = await db.find({ email: info.email }).limit(1);
+    const diffTime = new Date(Date.now() - process.env.EXPIRED_CODE * 1000);
+    const existedUser = await db
+      .find({ email: info.email, updated_time: { $gte: diffTime } })
+      .limit(1);
     if (existedUser.length == 0) {
       const error = "This email have not existed";
       return getResult.GetError(res, error);
@@ -51,10 +54,10 @@ exports.completeSignup = async function (req, res, next) {
             code: code,
           }
         );
-        const data = "Your Acc have successfull created"
+        const data = "Your Acc have successfull created";
         return getResult.GetSuccess(res, data);
-      }else {
-        const error = "Wrong code"
+      } else {
+        const error = "Wrong code";
         return getResult.GetError(res, error);
       }
     }
