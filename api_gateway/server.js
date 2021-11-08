@@ -1,6 +1,6 @@
 const GetSuccess = require("./ActionResult").GetSuccess;
 const _logger = require("./logger");
-const importAdmin = require('./import_admin').importAdmin
+const importAdmin = require("./import_admin").importAdmin;
 require("dotenv").config();
 
 var express = require("express");
@@ -24,7 +24,10 @@ const NAMESPACE = "Server";
 /** Log the request **/
 app.use((req, res, next) => {
   console.log(
-    _logger.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}] ===> ON CALL`)
+    _logger.info(
+      NAMESPACE,
+      `METHOD - [${req.method}], URL - [${req.url}] ===> ON CALL`
+    )
   );
 
   res.on("finish", () => {
@@ -58,6 +61,7 @@ app.use((req, res, next) => {
 //Use routes
 api_health(app);
 api_staff(app);
+api_user(app);
 
 app.set("port", process.env.API_GATEWAY_PORT || 3000);
 app.listen(app.get("port"), function () {

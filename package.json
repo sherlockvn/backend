@@ -3,6 +3,7 @@
     "start": "nodemon api_gateway/server.js"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.6.0",
     "basic-auth": "^2.0.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

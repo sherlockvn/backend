@@ -3,4 +3,5 @@ module.exports = function (app) {
   
     app.route("/user/login").post(controller.login);
     app.route("/user/signup").post(controller.signup)
+    app.route("/user/completeSignup").post(controller.completeSignup)
   };
